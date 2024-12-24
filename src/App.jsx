@@ -58,12 +58,23 @@ function App() {
       snowflake.style.animationDelay = `${Math.random() * 5}s`; // Random delay before start
       snowflakeContainer.appendChild(snowflake);
     }
+
+    // Play audio on first user interaction
+    const playAudio = () => {
+      const audio = document.getElementById('snowmanAudio');
+      audio.play();
+      window.removeEventListener('click', playAudio); // Remove listener after first interaction
+    };
+
+    window.addEventListener('click', playAudio);
+
+    return () => window.removeEventListener('click', playAudio); // Cleanup listener
   }, []);
 
   return (
     <div>
       {/* Add Audio Element */}
-      <audio autoPlay loop>
+      <audio id="snowmanAudio" loop>
         <source src={mrSnowman} type="audio/mp3" />
         Your browser does not support the audio element.
       </audio>
