@@ -78,3 +78,22 @@ body {
     transform: translateX(0);
   }
 }
+
+/* Style the music button to make it cute with an icon */
+.music-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: transparent;  /* Transparent background */
+  color: white;
+  font-size: 2em;  /* Larger font size for the icon */
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.2s, color 0.3s;
+}
+
+.music-button:hover {
+  color: #ff69b4;  /* Soft pink on hover */
+  transform: scale(1.2);  /* Slightly increase size on hover */
+}

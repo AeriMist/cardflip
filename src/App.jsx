@@ -17,25 +17,14 @@ import mrSnowman from './assets/Snowman.mp3';
 
 function App() {
   const [flippedStates, setFlippedStates] = useState([false, false, false, false]);
+  const [isPlaying, setIsPlaying] = useState(true);  // State to control music playback
 
   // Define the images for the front and back of each card
   const cardImages = [
-    {
-      front: front1,
-      back: back1
-    },
-    {
-      front: front2,
-      back: back2
-    },
-    {
-      front: front3,
-      back: back3
-    },
-    {
-      front: front4,
-      back: back4
-    }
+    { front: front1, back: back1 },
+    { front: front2, back: back2 },
+    { front: front3, back: back3 },
+    { front: front4, back: back4 }
   ];
 
   function flipCard(index) {
@@ -75,6 +64,17 @@ function App() {
     };
   }, []);
 
+  // Toggle music play/pause
+  const toggleMusic = () => {
+    const audio = document.getElementById('snowmanAudio');
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+    setIsPlaying(!isPlaying);  // Toggle playback state
+  };
+
   return (
     <div>
       {/* Add Audio Element */}
@@ -85,34 +85,21 @@ function App() {
 
       <div className="card-container">
         {cardImages.map((card, index) => (
-          <ReactCardFlip
-            key={index}
-            flipDirection="horizontal"
-            isFlipped={flippedStates[index]}
-          >
-            <div
-              className="card"
-              onClick={() => flipCard(index)}
-            >
-              <img
-                src={card.front}  // Use the front image for this card
-                alt={`Front ${index + 1}`}
-                className="card-image"
-              />
+          <ReactCardFlip key={index} flipDirection="horizontal" isFlipped={flippedStates[index]}>
+            <div className="card" onClick={() => flipCard(index)}>
+              <img src={card.front} alt={`Front ${index + 1}`} className="card-image" />
             </div>
-            <div
-              className="card card-back"
-              onClick={() => flipCard(index)}
-            >
-              <img
-                src={card.back}  // Use the back image for this card
-                alt={`Back ${index + 1}`}
-                className="card-image"
-              />
+            <div className="card card-back" onClick={() => flipCard(index)}>
+              <img src={card.back} alt={`Back ${index + 1}`} className="card-image" />
             </div>
           </ReactCardFlip>
         ))}
       </div>
+
+      {/* Cute Music Icon Button */}
+      <button className="music-button" onClick={toggleMusic}>
+        {isPlaying ? '🎶' : '❌'} {/* Music note icon when playing, cross when paused */}
+      </button>
     </div>
   );
 }
