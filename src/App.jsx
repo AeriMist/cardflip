@@ -3,14 +3,14 @@ import './App.css';
 import ReactCardFlip from 'react-card-flip';
 
 // Import images from the assets folder (now .png)
-import front1 from './assets/front1.png';
-import back1 from './assets/back1.png';
-import front2 from './assets/front2.png';
-import back2 from './assets/back2.png';
-import front3 from './assets/front3.png';
-import back3 from './assets/back3.png';
-import front4 from './assets/front4.png';
-import back4 from './assets/back4.png';
+import front1 from './assets/Front1.png';
+import back1 from './assets/Back1.png';
+import front2 from './assets/Front2.png';
+import back2 from './assets/Back2.png';
+import front3 from './assets/Front3.png';
+import back3 from './assets/Back3.png';
+import front4 from './assets/Front4.png';
+import back4 from './assets/Back4.png';
 
 // Import audio from the assets folder
 import mrSnowman from './assets/Snowman.mp3';
