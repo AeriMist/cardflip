@@ -44,7 +44,7 @@ function App() {
     setFlippedStates(newFlippedStates);
   }
 
-  // Snowflake generation logic
+  // Snowflake generation and audio autoplay logic
   useEffect(() => {
     const numberOfSnowflakes = 100;
     const snowflakeContainer = document.body;
@@ -59,16 +59,20 @@ function App() {
       snowflakeContainer.appendChild(snowflake);
     }
 
-    // Play audio on first user interaction
-    const playAudio = () => {
-      const audio = document.getElementById('snowmanAudio');
-      audio.play();
-      window.removeEventListener('click', playAudio); // Remove listener after first interaction
+    // Autoplay audio
+    const audio = document.getElementById('snowmanAudio');
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch((error) => {
+        console.error('Autoplay failed:', error);
+      });
+    }
+
+    return () => {
+      // Clean up snowflakes on component unmount
+      const snowflakes = document.querySelectorAll('.snowflake');
+      snowflakes.forEach((flake) => flake.remove());
     };
-
-    window.addEventListener('click', playAudio);
-
-    return () => window.removeEventListener('click', playAudio); // Cleanup listener
   }, []);
 
   return (
